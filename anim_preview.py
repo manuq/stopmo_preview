@@ -26,6 +26,21 @@ from gi.repository import PeasGtk
 from gi.repository import Entangle
 
 
+class AnimPreviewWindow(Gtk.Window):
+    def __init__(self, menu):
+        Gtk.Window.__init__(self)
+        self.menu = menu
+        self.connect("destroy", self.close)
+        self.connect("key-release-event", self.do_key_release)
+
+    def close(self, widget):
+        self.menu.set_active(False)
+
+
+    def do_key_release(self, src, ev):
+        if ev.keyval == Gdk.KEY_Escape:
+            self.menu.set_active(False)
+
 class AnimPreviewPluginWindow(object):
     '''Handles interaction with a single instance of
     the EntangleCameraManager window. We add a menu
@@ -43,23 +58,27 @@ class AnimPreviewPluginWindow(object):
         self.menu = Gtk.CheckMenuItem(label="Preview Animation")
         self.button = Gtk.Button("Play")
         self.menusig = None
-        self.winsig = None
         self.buttonsig = None
+        self.ani_win = None
 
     def do_start_preview(self):
+        self.ani_win = AnimPreviewWindow(self.menu)
+        self.ani_win.set_title("Animation Preview")
+        self.ani_win.show()
+
         builder = self.win.get_builder()
         pane = builder.get_object("win-box")
         pane.pack_start(self.button, False, True, 0)
         self.button.show()
         self.button.grab_focus()
-        self.winsig = self.win.connect("key-release-event", self.do_key_release)
         self.buttonsig = self.button.connect("clicked", self.do_play)
 
     def do_stop_preview(self):
+        self.ani_win.destroy()
+
         builder = self.win.get_builder()
         pane = builder.get_object("win-box")
         pane.remove(self.button)
-        self.win.disconnect(self.winsig)
         self.button.disconnect(self.buttonsig)
 
     def do_toggle_preview(self, src):
@@ -67,10 +86,6 @@ class AnimPreviewPluginWindow(object):
             self.do_start_preview()
         else:
             self.do_stop_preview()
-
-    def do_key_release(self, src, ev):
-        if ev.keyval == Gdk.KEY_Escape:
-            self.menu.set_active(False)
 
     def do_play(self, src):
         # self.win.capture()
