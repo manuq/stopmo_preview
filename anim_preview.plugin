@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python3
+Module=anim_preview
+IAge=1
+Name=Preview Animation
+Description=Play the stop motion animation made with the photos
+Authors=Manuel Quiñones <manuel.por.aca@gmail.com>
+Copyright=© 2014 Manuel Quiñones
+Website=http://entangle-photo.org/
