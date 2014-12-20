@@ -95,13 +95,10 @@ class StopmoPreviewWindow(Gtk.Window):
 
 
 class StopmoPreviewPluginWindow(object):
-    '''Handles interaction with a single instance of
-    the EntangleCameraManager window. We add a menu
-    option to the 'Windows' menu which allows the
-    photobox mode to be started. It can be stopped
-    by pressing escape. In photobox mode the menubar,
-    toolbar and controls are all hidden. A single
-    shoot button is added at the bottom of the screen'''
+    '''Handles interaction with a single instance of the
+    EntangleCameraManager window.We add a menu option to the 'Windows'
+    menu which allows the StopMotion Preview window to be displayed.
+    '''
 
     def __init__(self, win, config):
         '''@win: an instance of EntangleCameraManager'''
@@ -202,10 +199,10 @@ class StopmoPreviewPluginConfigure(Gtk.Grid):
 
 
 class StopmoPreviewPlugin(GObject.Object, Peas.Activatable, PeasGtk.Configurable):
-    '''Handles the plugin activate/deactivation and
-    tracking of camera manager windows. When a window
-    appears, it enables the photobox functionality on
-    that window'''
+    '''Handles the plugin activate/deactivation and tracking of camera
+    manager windows. When a window appears, it enables the StopMotion
+    preview functionality on that window
+    '''
     __gtype_name__ = "StopmoPreviewPlugin"
 
     object = GObject.property(type=GObject.Object)
