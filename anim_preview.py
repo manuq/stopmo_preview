@@ -26,20 +26,72 @@ from gi.repository import PeasGtk
 from gi.repository import Entangle
 
 
+class AnimArea(Gtk.DrawingArea):
+    def __init__(self, pixbuf):
+        self.pixbuf = pixbuf
+        Gtk.DrawingArea.__init__(self)
+        self.connect('draw', self._draw_cb)
+
+    def set_pixbuf(self, pixbuf):
+        if pixbuf is not None:
+            self.pixbuf = pixbuf
+            self.queue_draw()
+
+    def _draw_cb(self, widget, context):
+        if self.pixbuf is not None:
+            alloc = widget.get_allocation()
+            #print(alloc.width)
+            #print(alloc.height)
+            Gdk.cairo_set_source_pixbuf(context, self.pixbuf, 0, 0)
+            context.paint_with_alpha(1)
+
 class AnimPreviewWindow(Gtk.Window):
-    def __init__(self, menu):
+    def __init__(self, plugin_win, session_browser):
         Gtk.Window.__init__(self)
-        self.menu = menu
+        self.plugin_win = plugin_win
+        self.session_browser = session_browser
+        self.idx = 0
+
+        box = Gtk.Box()
+        self.add(box)
+        box.show()
+
+        self.button = Gtk.Button("Play")
+        box.pack_start(self.button, False, True, 0)
+        self.button.show()
+        self.buttonsig = self.button.connect("clicked", self.do_play)
+
+        pixbuf = self.next_pixbuf()
+        self.drawing_area = AnimArea(pixbuf)
+        box.pack_start(self.drawing_area, True, True, 0)
+        self.drawing_area.show()
+
         self.connect("destroy", self.close)
         self.connect("key-release-event", self.do_key_release)
 
-    def close(self, widget):
-        self.menu.set_active(False)
+    def next_pixbuf(self):
+        thumb_loader = self.session_browser.get_thumbnail_loader()
+        session = self.session_browser.get_session()
+        image = session.image_get(self.idx)
+        # print(image.get_filename())
+        pixbuf = thumb_loader.get_pixbuf(image)
 
+        if self.idx <= session.image_count() - 2:
+            self.idx += 1
+        else:
+            self.idx = 0
+        return pixbuf
+
+    def do_play(self, src):
+        self.drawing_area.set_pixbuf(self.next_pixbuf())
+
+    def close(self, widget):
+        self.plugin_win.menu.set_active(False)
 
     def do_key_release(self, src, ev):
         if ev.keyval == Gdk.KEY_Escape:
-            self.menu.set_active(False)
+            self.plugin_win.menu.set_active(False)
+
 
 class AnimPreviewPluginWindow(object):
     '''Handles interaction with a single instance of
@@ -62,11 +114,15 @@ class AnimPreviewPluginWindow(object):
         self.ani_win = None
 
     def do_start_preview(self):
-        self.ani_win = AnimPreviewWindow(self.menu)
+        builder = self.win.get_builder()
+
+        session_browser = builder.get_object("display-panel").get_child2().get_children()[0]
+        # session_browser.set_visible(False)
+
+        self.ani_win = AnimPreviewWindow(self, session_browser)
         self.ani_win.set_title("Animation Preview")
         self.ani_win.show()
 
-        builder = self.win.get_builder()
         pane = builder.get_object("win-box")
         pane.pack_start(self.button, False, True, 0)
         self.button.show()
