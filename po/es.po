@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-20 19:32-0300\n"
-"PO-Revision-Date: 2014-12-20 19:34-0300\n"
+"POT-Creation-Date: 2014-12-20 20:56-0300\n"
+"PO-Revision-Date: 2014-12-20 20:57-0300\n"
 "Last-Translator: manuq <manuel.por.aca@gmail.com>\n"
 "Language-Team: Spanish\n"
 "Language: es\n"
@@ -18,10 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: ../src/stopmo_preview.py:117 ../src/stopmo_preview.py:131
+#: ../src/stopmo_preview.py:64 ../src/stopmo_preview.py:66
+#: ../src/stopmo_preview.py:128
+msgid "Settings"
+msgstr "Preferencias"
+
+#: ../src/stopmo_preview.py:134
+msgid "Close"
+msgstr "Cerrar"
+
+#: ../src/stopmo_preview.py:151 ../src/stopmo_preview.py:165
 msgid "StopMotion Preview"
 msgstr "Previsualizacin de StopMotion"
 
-#: ../src/stopmo_preview.py:194
+#: ../src/stopmo_preview.py:228
 msgid "Frames per second:"
 msgstr "Cuadros por segundo:"

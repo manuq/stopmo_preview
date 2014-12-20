@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-20 19:32-0300\n"
+"POT-Creation-Date: 2014-12-20 20:56-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/stopmo_preview.py:117 ../src/stopmo_preview.py:131
+#: ../src/stopmo_preview.py:64 ../src/stopmo_preview.py:66
+#: ../src/stopmo_preview.py:128
+msgid "Settings"
+msgstr ""
+
+#: ../src/stopmo_preview.py:134
+msgid "Close"
+msgstr ""
+
+#: ../src/stopmo_preview.py:151 ../src/stopmo_preview.py:165
 msgid "StopMotion Preview"
 msgstr ""
 
-#: ../src/stopmo_preview.py:194
+#: ../src/stopmo_preview.py:228
 msgid "Frames per second:"
 msgstr ""
