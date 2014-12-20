@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+  <schema path="/org/entangle-photo/plugins/stopmo_preview/" id="org.entangle-photo.plugins.stopmo_preview" gettext-domain="entangle-photo">
+    <key type="i" name="fps">
+      <default>24</default>
+      <summary>Frames per second</summary>
+      <description>The speed of the preview animation</description>
+    </key>
+  </schema>
+
+</schemalist>

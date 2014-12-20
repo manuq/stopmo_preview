@@ -6,7 +6,7 @@ import shutil
 from gi.repository import GLib
 
 config_dir = GLib.get_user_config_dir()
-plugins_dir = os.path.join(config_dir, 'entangle', 'plugins', 'anim_preview')
+plugins_dir = os.path.join(config_dir, 'entangle', 'plugins', 'stopmo_preview')
 
 if os.path.exists(plugins_dir):
     shutil.rmtree(plugins_dir)

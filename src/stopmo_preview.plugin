@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python3
+Module=stopmo_preview
+IAge=1
+Name=StopMotion Preview
+Description=Preview the Stop Motion animation made from the photos of the current session
+Authors=Manuel Quiñones <manuel.por.aca@gmail.com>
+Copyright=© 2014 Manuel Quiñones
+Website=https://twitter.com/srmanuq
