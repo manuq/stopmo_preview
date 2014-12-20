@@ -69,7 +69,8 @@ class AnimPreviewWindow(Gtk.Window):
         box.pack_start(self.drawing_area, True, True, 0)
         self.drawing_area.show()
 
-        self.set_default_size(pixbuf.get_width() * 2, pixbuf.get_height() * 2)
+        if pixbuf is not None:
+            self.set_default_size(pixbuf.get_width() * 2, pixbuf.get_height() * 2)
         self.play()
 
         self.connect("destroy", self.close)
@@ -77,6 +78,10 @@ class AnimPreviewWindow(Gtk.Window):
     def next_pixbuf(self):
         thumb_loader = self.session_browser.get_thumbnail_loader()
         session = self.session_browser.get_session()
+
+        if session.image_count() == 0:
+            return None
+
         image = session.image_get(self.idx)
         # print(image.get_filename())
         pixbuf = thumb_loader.get_pixbuf(image)
