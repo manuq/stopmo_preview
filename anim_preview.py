@@ -50,7 +50,7 @@ class AnimArea(Gtk.DrawingArea):
             context.translate(dx, dy)
             context.scale(scale, scale)
             Gdk.cairo_set_source_pixbuf(context, self.pixbuf, 0, 0)
-            context.paint_with_alpha(1)
+            context.paint()
 
 class AnimPreviewWindow(Gtk.Window):
     def __init__(self, plugin_win, session_browser):
