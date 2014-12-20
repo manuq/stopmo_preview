@@ -11,14 +11,14 @@ class AnimArea(Gtk.DrawingArea):
     def __init__(self, pixbuf):
         self.pixbuf = pixbuf
         Gtk.DrawingArea.__init__(self)
-        self.connect('draw', self._draw_cb)
+        self.connect('draw', self.on_draw)
 
     def set_pixbuf(self, pixbuf):
         if pixbuf is not None:
             self.pixbuf = pixbuf
             self.queue_draw()
 
-    def _draw_cb(self, widget, context):
+    def on_draw(self, widget, context):
         if self.pixbuf is not None:
             alloc = self.get_allocation()
             pixbuf_width = self.pixbuf.get_width()
@@ -54,7 +54,7 @@ class AnimPreviewWindow(Gtk.Window):
             self.set_default_size(pixbuf.get_width() * 2, pixbuf.get_height() * 2)
         self.play()
 
-        self.connect("destroy", self.close)
+        self.connect("delete-event", self.on_delete)
 
     def next_pixbuf(self):
         thumb_loader = self.session_browser.get_thumbnail_loader()
@@ -87,10 +87,10 @@ class AnimPreviewWindow(Gtk.Window):
             GObject.source_remove(self.play_hid)
             self.play_hid = None
 
-    # FIXME remove
-    def close(self, widget):
-        self.stop()
+    def on_delete(self, widget, event):
+        self.set_visible(False)
         self.plugin_win.menu.set_active(False)
+        return True
 
 
 class AnimPreviewPluginWindow(object):
@@ -108,44 +108,31 @@ class AnimPreviewPluginWindow(object):
         self.config = config
         self.win = win
         self.menu = Gtk.CheckMenuItem(label="Preview Animation")
-        self.button = Gtk.Button("Play")
         self.menusig = None
-        self.buttonsig = None
         self.ani_win = None
 
     def do_start_preview(self):
+        if self.ani_win is not None:
+            self.ani_win.set_visible(True)
+            self.ani_win.play()
+            return
+
         builder = self.win.get_builder()
 
         session_browser = builder.get_object("display-panel").get_child2().get_children()[0]
-        # session_browser.set_visible(False)
-
         self.ani_win = AnimPreviewWindow(self, session_browser)
         self.ani_win.set_title("Animation Preview")
         self.ani_win.show()
 
-        pane = builder.get_object("win-box")
-        pane.pack_start(self.button, False, True, 0)
-        self.button.show()
-        self.button.grab_focus()
-        self.buttonsig = self.button.connect("clicked", self.do_play)
-
     def do_stop_preview(self):
-        self.ani_win.destroy()
+        self.ani_win.set_visible(False)
+        self.ani_win.stop()
 
-        builder = self.win.get_builder()
-        pane = builder.get_object("win-box")
-        pane.remove(self.button)
-        self.button.disconnect(self.buttonsig)
-
-    def do_toggle_preview(self, src):
+    def on_toggle_preview(self, src):
         if src.get_active():
             self.do_start_preview()
         else:
             self.do_stop_preview()
-
-    def do_play(self, src):
-        # self.win.capture()
-        print("playing at {0} fps".format(self.config.get_fps()))
 
     def activate(self):
         '''Activate the plugin on the window'''
@@ -154,7 +141,7 @@ class AnimPreviewPluginWindow(object):
         items = wins.get_submenu()
         items.append(self.menu)
         self.menu.show()
-        self.menusig = self.menu.connect("toggled", self.do_toggle_preview)
+        self.menusig = self.menu.connect("toggled", self.on_toggle_preview)
 
     def deactivate(self):
         '''Deactivate the plugin on the window, undoing
