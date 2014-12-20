@@ -12,7 +12,6 @@ from gi.repository import Entangle
 
 curdir = os.path.dirname(os.path.abspath(__file__))
 localedir = os.path.join(curdir, 'locale')
-print(localedir)
 gettext.install('stopmo_preview', localedir=localedir)
 
 
@@ -50,13 +49,29 @@ class StopmoPreviewWindow(Gtk.Window):
         self.play_hid = None
         self.idx = 0
 
-        box = Gtk.Box()
-        self.add(box)
-        box.show()
+        grid = Gtk.Grid()
+        grid.props.orientation = Gtk.Orientation.VERTICAL
+        self.add(grid)
+        grid.show()
+
+        toolbar = Gtk.Toolbar()
+        toolbar.props.toolbar_style = Gtk.ToolbarStyle.BOTH_HORIZ
+        toolbar.props.hexpand = True
+        grid.add(toolbar)
+        toolbar.show_all()
+
+        settings_button = Gtk.ToolButton()
+        settings_button.set_label(_('Settings'))
+        settings_button.set_icon_name('emblem-system-symbolic')
+        settings_button.set_tooltip_text(_('Settings'))
+        settings_button.connect("clicked", self.on_settings_clicked)
+        toolbar.insert(settings_button, 0)
+        settings_button.show()
 
         pixbuf = self.next_pixbuf()
         self.drawing_area = AnimArea(pixbuf)
-        box.pack_start(self.drawing_area, True, True, 0)
+        self.drawing_area.props.expand = True
+        grid.add(self.drawing_area)
         self.drawing_area.show()
 
         if pixbuf is not None:
@@ -101,6 +116,25 @@ class StopmoPreviewWindow(Gtk.Window):
         self.set_visible(False)
         self.plugin_win.menu.set_active(False)
         return True
+
+    def on_settings_response(self, dialog, response):
+        if response == Gtk.ResponseType.CLOSE:
+            self.stop()
+            self.play()
+            dialog.close()
+
+    def on_settings_clicked(self, widget):
+        grid = StopmoPreviewPluginConfigure(self.plugin_win.config)
+        dialog = Gtk.Dialog(title=_("Settings"),
+                            parent=self,
+                            flags=Gtk.DialogFlags.MODAL)
+        grid.props.expand = True
+        dialog.get_content_area().add(grid)
+        grid.show_all()
+        dialog.add_button(_("Close"), Gtk.ResponseType.CLOSE)
+        dialog.set_transient_for(self)
+        dialog.connect('response', self.on_settings_response)
+        dialog.run()
 
 
 class StopmoPreviewPluginWindow(object):
