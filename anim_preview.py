@@ -224,7 +224,7 @@ class AnimPreviewPluginConfigure(Gtk.Grid):
         self.set_row_spacing(6)
         self.set_column_spacing(6)
 
-        self.fpstxt.connect("changed", self.do_set_fps)
+        self.fpstxt.connect("value-changed", self.do_set_fps)
 
         self.fpstxt.set_value(self.config.get_fps())
 
