@@ -39,9 +39,16 @@ class AnimArea(Gtk.DrawingArea):
 
     def _draw_cb(self, widget, context):
         if self.pixbuf is not None:
-            alloc = widget.get_allocation()
-            #print(alloc.width)
-            #print(alloc.height)
+            alloc = self.get_allocation()
+            pixbuf_width = self.pixbuf.get_width()
+            pixbuf_height = self.pixbuf.get_height()
+            scale_x = alloc.width / pixbuf_width
+            scale_y = alloc.height / pixbuf_height
+            scale = min(scale_x, scale_y)
+            dx = (alloc.width - pixbuf_width * scale) / 2
+            dy = (alloc.height - pixbuf_height * scale) / 2
+            context.translate(dx, dy)
+            context.scale(scale, scale)
             Gdk.cairo_set_source_pixbuf(context, self.pixbuf, 0, 0)
             context.paint_with_alpha(1)
 
@@ -50,24 +57,22 @@ class AnimPreviewWindow(Gtk.Window):
         Gtk.Window.__init__(self)
         self.plugin_win = plugin_win
         self.session_browser = session_browser
+        self.play_hid = None
         self.idx = 0
 
         box = Gtk.Box()
         self.add(box)
         box.show()
 
-        self.button = Gtk.Button("Play")
-        box.pack_start(self.button, False, True, 0)
-        self.button.show()
-        self.buttonsig = self.button.connect("clicked", self.do_play)
-
         pixbuf = self.next_pixbuf()
         self.drawing_area = AnimArea(pixbuf)
         box.pack_start(self.drawing_area, True, True, 0)
         self.drawing_area.show()
 
+        self.set_default_size(pixbuf.get_width() * 2, pixbuf.get_height() * 2)
+        self.play()
+
         self.connect("destroy", self.close)
-        self.connect("key-release-event", self.do_key_release)
 
     def next_pixbuf(self):
         thumb_loader = self.session_browser.get_thumbnail_loader()
@@ -82,15 +87,23 @@ class AnimPreviewWindow(Gtk.Window):
             self.idx = 0
         return pixbuf
 
-    def do_play(self, src):
+    def next_frame(self):
         self.drawing_area.set_pixbuf(self.next_pixbuf())
+        return True
 
+    def play(self):
+        if self.play_hid is None:
+            self.play_hid = GObject.timeout_add(48, self.next_frame)
+
+    def stop(self):
+        if self.play_hid is not None:
+            GObject.source_remove(self.play_hid)
+            self.play_hid = None
+
+    # FIXME remove
     def close(self, widget):
+        self.stop()
         self.plugin_win.menu.set_active(False)
-
-    def do_key_release(self, src, ev):
-        if ev.keyval == Gdk.KEY_Escape:
-            self.plugin_win.menu.set_active(False)
 
 
 class AnimPreviewPluginWindow(object):
