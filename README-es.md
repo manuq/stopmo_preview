@@ -1,5 +1,4 @@
-Previsualizar StopMotion para Entangle
-======================================
+# Previsualizar StopMotion para Entangle
 
 Extesión para Entangle para previsualizar animaciones Stop Motion.
 
@@ -10,17 +9,15 @@ indefinidamente en bucle.
 Fue probado en Entangle versión 0.6.0, que a la hora de escribir esto
 es la última.  [¡Descargala!](http://entangle-photo.org/).
 
-Uso
-===
+## Uso
 
 Para abrir la ventana de previsualización, vaya al menú Ventanas y
-active **Stopmotion Preview**.
+active **Previsualización de Stopmotion**.
 
 Para usarlo, primero tiene que instalar y activar la extensión.  Vea
 las instrucciones **Instalación** abajo.
 
-Instalación
-===========
+## Instalación
 
 Descargue el paquete [de aquí](<http://...>) y descomprimalo en su
 computadora.

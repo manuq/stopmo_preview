@@ -1,5 +1,4 @@
-StopMotion Preview for Entangle
-===============================
+# StopMotion Preview for Entangle
 
 A plugin for Entangle to preview Stop Motion animation.
 
@@ -10,8 +9,7 @@ plays indefinitely in loop.
 It has been tested in Entangle version 0.6.0, which at the moment of
 this writing is the latest.  [Go get it!](http://entangle-photo.org/).
 
-Usage
-=====
+## Usage
 
 To bring up the preview window, go to the Windows menu and toggle
 **Stopmotion Preview**.
@@ -19,8 +17,7 @@ To bring up the preview window, go to the Windows menu and toggle
 To use it, first you need to install and activate the plugin.  See
 **Install** instructions below.
 
-Install
-=======
+## Install
 
 Download the package [from here](<http://...>) and uncompress it to
 your computer.

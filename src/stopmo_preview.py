@@ -1,3 +1,6 @@
+import os
+import gettext
+
 from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
@@ -5,6 +8,12 @@ from gi.repository import Gio
 from gi.repository import Peas
 from gi.repository import PeasGtk
 from gi.repository import Entangle
+
+
+curdir = os.path.dirname(os.path.abspath(__file__))
+localedir = os.path.join(curdir, 'locale')
+print(localedir)
+gettext.install('stopmo_preview', localedir=localedir)
 
 
 class AnimArea(Gtk.DrawingArea):
@@ -105,7 +114,7 @@ class StopmoPreviewPluginWindow(object):
 
         self.config = config
         self.win = win
-        self.menu = Gtk.CheckMenuItem(label="StopMotion Preview")
+        self.menu = Gtk.CheckMenuItem(label=_("StopMotion Preview"))
         self.menusig = None
         self.ani_win = None
 
@@ -119,7 +128,7 @@ class StopmoPreviewPluginWindow(object):
 
         session_browser = builder.get_object("display-panel").get_child2().get_children()[0]
         self.ani_win = StopmoPreviewWindow(self, session_browser)
-        self.ani_win.set_title("StopMotion Preview")
+        self.ani_win.set_title(_("StopMotion Preview"))
         self.ani_win.show()
 
     def do_stop_preview(self):
@@ -182,7 +191,7 @@ class StopmoPreviewPluginConfigure(Gtk.Grid):
         adjustment = Gtk.Adjustment(50.0, 1.0, 50.0, 1.0, 5.0, 0.0)
         self.fpstxt = Gtk.SpinButton()
         self.fpstxt.configure(adjustment, 1.0, 0)
-        self.attach(Gtk.Label("Frames per second:"),
+        self.attach(Gtk.Label(_("Frames per second:")),
                     0, 0, 1, 1)
         self.attach(self.fpstxt,
                     1, 0, 2, 1)
