@@ -1,9 +1,0 @@
-[Plugin]
-Loader=python3
-Module=anim_preview
-IAge=1
-Name=Preview Animation
-Description=Play the photos as a Stop Motion animation
-Authors=Manuel Quiñones <manuel.por.aca@gmail.com>
-Copyright=© 2014 Manuel Quiñones
-Website=https://twitter.com/srmanuq
