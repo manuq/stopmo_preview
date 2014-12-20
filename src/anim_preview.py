@@ -64,7 +64,6 @@ class AnimPreviewWindow(Gtk.Window):
             return None
 
         image = session.image_get(self.idx)
-        # print(image.get_filename())
         pixbuf = thumb_loader.get_pixbuf(image)
 
         if self.idx > 0:
@@ -80,7 +79,9 @@ class AnimPreviewWindow(Gtk.Window):
     def play(self):
         if self.play_hid is None:
             fps = self.plugin_win.config.get_fps()
-            self.play_hid = GObject.timeout_add(fps, self.next_frame)
+            milliseconds = 1.0 / fps * 1000
+            self.play_hid = GObject.timeout_add(milliseconds,
+                                                self.next_frame)
 
     def stop(self):
         if self.play_hid is not None:
