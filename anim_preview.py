@@ -98,7 +98,8 @@ class AnimPreviewWindow(Gtk.Window):
 
     def play(self):
         if self.play_hid is None:
-            self.play_hid = GObject.timeout_add(48, self.next_frame)
+            fps = self.plugin_win.config.get_fps()
+            self.play_hid = GObject.timeout_add(fps, self.next_frame)
 
     def stop(self):
         if self.play_hid is not None:
