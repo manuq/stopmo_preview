@@ -81,10 +81,10 @@ class AnimPreviewWindow(Gtk.Window):
         # print(image.get_filename())
         pixbuf = thumb_loader.get_pixbuf(image)
 
-        if self.idx <= session.image_count() - 2:
-            self.idx += 1
+        if self.idx > 0:
+            self.idx -= 1
         else:
-            self.idx = 0
+            self.idx = session.image_count() - 1
         return pixbuf
 
     def next_frame(self):
