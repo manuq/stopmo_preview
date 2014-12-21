@@ -24,8 +24,10 @@ las instrucciones **Instalación** abajo.
 
 ## Instalación
 
-Descargue el paquete [de aquí](<http://...>) y descomprimalo en su
-computadora.
+Descargue el paquete:
+[ZIP](https://github.com/manuq/stopmo_preview/archive/1.0.zip) o
+[tar.gz](https://github.com/manuq/stopmo_preview/archive/1.0.tar.gz).
+Descomprimalo en su computadora.
 
 Abra una consola y corra:
 

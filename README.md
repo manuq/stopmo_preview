@@ -24,8 +24,10 @@ To use it, first you need to install and activate the plugin.  See
 
 ## Install
 
-Download the package [from here](<http://...>) and uncompress it to
-your computer.
+Download the package:
+[ZIP](https://github.com/manuq/stopmo_preview/archive/1.0.zip) o
+[tar.gz](https://github.com/manuq/stopmo_preview/archive/1.0.tar.gz).
+Uncompress it to your computer.
 
 Open a console and run:
 
