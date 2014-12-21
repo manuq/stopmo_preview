@@ -26,8 +26,9 @@ Abra una consola y corra:
 
     ./install.py
 
-Inicie Entangle and vaya a Edición -> Preferencias -> Plugins.
+Inicie Entangle y vaya a Edición -> Preferencias -> Plugins.
 **StopMotion Preview** debería aparecer en la lista.  Actívelo.
 
 Cierre el diálogo de preferencias y abra el menú Ventanas.  Si la
-extensión fue activada, verá un nuevo ítem **Stopmotion Preview**.
+extensión fue activada, verá un nuevo ítem **Previsualización de
+Stopmotion**.
