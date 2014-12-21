@@ -2,6 +2,8 @@
 
 A plugin for Entangle to preview Stop Motion animation.
 
+Click the image to see a demo video:
+
 <a href="http://www.youtube.com/watch?v=CdJ6xXIcawk" target="_blank"><img src="http://img.youtube.com/vi/CdJ6xXIcawk/0.jpg"
 alt="Screencast" width="240" height="180" border="10" /></a>
 

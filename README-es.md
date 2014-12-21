@@ -2,6 +2,8 @@
 
 Extensión para Entangle para previsualizar animaciones Stop Motion.
 
+Haga clic en la imagen para ver un video de demo:
+
 <a href="http://www.youtube.com/watch?v=CdJ6xXIcawk" target="_blank"><img src="http://img.youtube.com/vi/CdJ6xXIcawk/0.jpg"
 alt="Screencast" width="240" height="180" border="10" /></a>
 
