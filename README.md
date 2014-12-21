@@ -2,6 +2,9 @@
 
 A plugin for Entangle to preview Stop Motion animation.
 
+<a href="http://www.youtube.com/watch?v=CdJ6xXIcawk" target="_blank"><img src="http://img.youtube.com/vi/CdJ6xXIcawk/0.jpg"
+alt="Screencast" width="240" height="180" border="10" /></a>
+
 This plugin provides a new window that will preview the Stop Motion
 animation made from the photos of the current session.  The animation
 plays indefinitely in loop.
