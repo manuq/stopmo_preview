@@ -1,6 +1,6 @@
 # Previsualizar StopMotion para Entangle
 
-Extensión para Entangle para previsualizar animaciones Stop Motion.
+Extensión de Entangle para previsualizar animaciones Stop Motion.
 
 Haga clic en la imagen para ver un video de demo:
 
