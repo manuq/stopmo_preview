@@ -1,0 +1,36 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-20 20:56-0300\n"
+"PO-Revision-Date: 2015-05-05 04:13-0600\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.7.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ca\n"
+
+#: ../src/stopmo_preview.py:64 ../src/stopmo_preview.py:66
+#: ../src/stopmo_preview.py:128
+msgid "Settings"
+msgstr "Configuració"
+
+#: ../src/stopmo_preview.py:134
+msgid "Close"
+msgstr "Tanca"
+
+#: ../src/stopmo_preview.py:151 ../src/stopmo_preview.py:165
+msgid "StopMotion Preview"
+msgstr "Previsualització d’StopMotion"
+
+#: ../src/stopmo_preview.py:228
+msgid "Frames per second:"
+msgstr "Quadres per segon:"
