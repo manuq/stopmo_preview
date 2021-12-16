@@ -31,7 +31,7 @@ Uncompress it to your computer.
 
 Open a console and run:
 
-    ./install.py
+    python install.py
 
 Start Entangle and go to Edit -> Preferences -> Plugins.  **StopMotion
 Preview** should appear in the list.  Activate it.
